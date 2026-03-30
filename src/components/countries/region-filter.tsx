@@ -1,3 +1,5 @@
+import styles from './region-filter.module.css';
+
 const REGION_OPTIONS = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
 interface RegionFilterProps {
@@ -12,9 +14,11 @@ export function RegionFilter({
   disabled = false,
 }: RegionFilterProps) {
   return (
-    <label>
+    <label className={styles.field}>
       <span className="sr-only">Filter by region</span>
+      <span className={styles.icon} aria-hidden="true" />
       <select
+        className={styles.select}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         disabled={disabled}

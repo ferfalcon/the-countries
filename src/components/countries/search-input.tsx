@@ -1,3 +1,5 @@
+import styles from './search-input.module.css';
+
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -12,9 +14,11 @@ export function SearchInput({
   placeholder = 'Search...',
 }: SearchInputProps) {
   return (
-    <label>
+    <label className={styles.field}>
       <span className="sr-only">Search for a country</span>
+      <span className={styles.icon} aria-hidden="true" />
       <input
+        className={styles.input}
         type="search"
         value={value}
         onChange={(event) => onChange(event.target.value)}

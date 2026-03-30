@@ -1,0 +1,32 @@
+.field {
+  position: relative;
+  display: inline-flex;
+  width: min(100%, 14rem);
+}
+
+.select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 1rem 3rem 1rem 1.5rem;
+  border: 0;
+  appearance: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-elevated);
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 1.25rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  transform: translateY(-65%) rotate(45deg);
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  pointer-events: none;
+}
+
+.field:focus-within .icon {
+  border-color: var(--color-text);
+}
