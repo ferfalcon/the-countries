@@ -1,0 +1,44 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(100% - 2rem, 80rem);
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+.brand {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.themeToggle {
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.themeLabel {
+  font-weight: 600;
+}
+
+@media (min-width: 48rem) {
+  .brand {
+    font-size: 1.25rem;
+  }
+}

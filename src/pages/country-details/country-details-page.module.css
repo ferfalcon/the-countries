@@ -1,0 +1,14 @@
+.page {
+  display: grid;
+  gap: 2rem;
+}
+
+.content {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
