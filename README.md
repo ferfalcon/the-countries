@@ -2,9 +2,11 @@
 
 ![Design preview for the REST Countries API with color theme switcher coding challenge](./preview.jpg)
 
-A React, TypeScript, and Vite implementation of the [REST Countries API with color theme switcher challenge](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca).
+A React, TypeScript, and Vite implementation of the [Frontend Mentor REST Countries API with color theme switcher challenge](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca).
 
 Built with **React**, **TypeScript**, and **Vite**, this project places an emphasis on **clean frontend architecture**, **accessible UI**, and **responsive design**.
+
+The goal of this implementation was to build a clean, accessible, and maintainable solution to the challenge while keeping the architecture simple and explicit.
 
 ## Overview
 
@@ -20,7 +22,7 @@ This app integrates with the [REST Countries API](https://restcountries.com) and
 ## Links
 
 * Repository: [https://github.com/ferfalcon/the-countries](https://github.com/ferfalcon/the-countries)
-* Live site: [TBD]()
+* Live site: [https://the-countries.vercel.app/](https://the-countries.vercel.app/)
 
 ## Built with
 
@@ -54,6 +56,8 @@ API response -> mapper -> frontend model -> UI
 ```
 
 This prevents raw API shapes from leaking into presentational components and keeps the UI easier to reason about and test.
+
+The project separates API access, data mapping, and UI rendering so components can stay focused on presentation and route-level state.
 
 ### Project structure
 
@@ -142,7 +146,7 @@ Create a production build:
 npm run build
 ```
 
-## What this project demonstrates
+## Implementation notes
 
 This project is intentionally small in scope but strong in implementation quality. It demonstrates:
 
