@@ -15,7 +15,6 @@ export function CountryCard({ country }: CountryCardProps) {
         <Link
           to={`/country/${country.code}`}
           className={styles.link}
-          aria-label={`View details for ${country.name}`}
         >
           <img
             className={styles.flag}

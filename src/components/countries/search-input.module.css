@@ -33,10 +33,16 @@
   background: var(--color-surface);
   color: var(--color-text);
   box-shadow: var(--shadow-elevated);
+  transition: box-shadow 180ms ease;
 }
 
 .input::placeholder {
   color: var(--color-text-muted);
+}
+
+.field:hover .input,
+.field:focus-within .input {
+  box-shadow: 0 0.35rem 1.1rem hsl(0 0% 0% / 0.12);
 }
 
 .field:focus-within .icon {

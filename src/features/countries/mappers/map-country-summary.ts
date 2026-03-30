@@ -10,7 +10,7 @@ export function mapCountrySummary(
     population: rawCountry.population,
     region: rawCountry.region,
     capital: rawCountry.capital?.[0] ?? null,
-    flagAlt: rawCountry.flags.alt ?? `${rawCountry.name.common} flag`,
+    flagAlt: rawCountry.flags.alt ?? `Flag of ${rawCountry.name.common}`,
     flagUrl: rawCountry.flags.svg,
   };
 }

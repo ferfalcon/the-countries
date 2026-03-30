@@ -18,7 +18,8 @@ export function AppHeader() {
           type="button"
           className={styles.themeToggle}
           onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+          aria-label={`Activate ${theme === 'light' ? 'dark' : 'light'} theme`}
+          aria-pressed={theme === 'dark'}
         >
           <span className={styles.themeLabel}>
             {theme === 'light' ? 'Dark mode' : 'Light mode'}

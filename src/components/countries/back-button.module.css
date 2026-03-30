@@ -5,5 +5,12 @@
   background: var(--color-surface);
   box-shadow: var(--shadow-elevated);
   color: var(--color-text);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
+.button:hover {
+  transform: translateY(-0.05rem);
+  box-shadow: 0 0.45rem 1.2rem hsl(0 0% 0% / 0.12);
+}

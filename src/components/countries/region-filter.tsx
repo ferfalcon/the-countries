@@ -19,6 +19,7 @@ export function RegionFilter({
       <span className={styles.icon} aria-hidden="true" />
       <select
         className={styles.select}
+        name="region"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         disabled={disabled}

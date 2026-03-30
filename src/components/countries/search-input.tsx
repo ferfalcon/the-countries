@@ -20,10 +20,14 @@ export function SearchInput({
       <input
         className={styles.input}
         type="search"
+        name="search"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         disabled={disabled}
         placeholder={placeholder}
+        autoComplete="off"
+        enterKeyHint="search"
+        spellCheck={false}
       />
     </label>
   );

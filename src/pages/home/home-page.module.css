@@ -5,12 +5,13 @@
 
 .controls {
   display: grid;
-  gap: 2.5rem;
+  gap: 1rem;
 }
 
 .state {
   display: grid;
   justify-items: center;
+  max-width: 42rem;
   padding: 3rem 1.5rem;
   border-radius: 0.75rem;
   background: var(--color-surface);
@@ -25,5 +26,6 @@
   .controls {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+    gap: 2.5rem;
   }
 }

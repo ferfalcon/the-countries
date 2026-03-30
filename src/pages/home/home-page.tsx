@@ -21,19 +21,29 @@ export function HomePage() {
   });
 
   return (
-    <section className={styles.page} aria-labelledby="home-page-title">
+    <section
+      className={styles.page}
+      aria-labelledby="home-page-title"
+      aria-busy={status === 'loading'}
+    >
       <h1 id="home-page-title" className="sr-only">
         Browse countries
       </h1>
 
-      <div className={styles.controls} aria-label="Countries controls">
+      <form
+        className={styles.controls}
+        aria-label="Search and filter countries"
+        onSubmit={(event) => {
+          event.preventDefault();
+        }}
+      >
         <SearchInput
           value={searchTerm}
           onChange={setSearchTerm}
           placeholder="Search for a country..."
         />
         <RegionFilter value={selectedRegion} onChange={setSelectedRegion} />
-      </div>
+      </form>
 
       {status === 'loading' && (
         <div className={styles.state}>

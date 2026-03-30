@@ -28,7 +28,7 @@ export function mapCountryDetails(
     currencies,
     languages,
     borderCountryCodes: rawCountry.borders ?? [],
-    flagAlt: rawCountry.flags.alt ?? `${rawCountry.name.common} flag`,
+    flagAlt: rawCountry.flags.alt ?? `Flag of ${rawCountry.name.common}`,
     flagUrl: rawCountry.flags.svg,
   };
 }

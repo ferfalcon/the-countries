@@ -1,0 +1,26 @@
+.spinner {
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.indicator {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.25rem solid hsl(0 0% 0% / 0.08);
+  border-top-color: hsl(199 88% 48%);
+  border-radius: 50%;
+  animation: spin 900ms linear infinite;
+}
+
+.label {
+  font-weight: 600;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

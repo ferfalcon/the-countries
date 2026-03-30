@@ -15,7 +15,7 @@ export function CountryDetailsPage() {
   );
 
   return (
-    <section className={styles.page}>
+    <section className={styles.page} aria-busy={status === 'loading'}>
       <BackButton />
 
       {status === 'loading' && (

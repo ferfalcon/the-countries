@@ -9,6 +9,7 @@ export function BackButton() {
     <button
       type="button"
       className={styles.button}
+      aria-label="Go back"
       onClick={() => {
         if (window.history.length > 1) {
           navigate(-1);

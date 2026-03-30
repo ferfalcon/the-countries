@@ -17,13 +17,20 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
   font-size: 1rem;
   font-weight: 800;
+  line-height: 1.2;
   color: var(--color-text);
   text-decoration: none;
+  border-radius: 0.4rem;
 }
 
 .themeToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   padding: 0.5rem 0.75rem;
   border-radius: 999px;
@@ -31,6 +38,19 @@
   color: var(--color-text);
   font: inherit;
   cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.brand:hover,
+.themeToggle:hover {
+  background: hsl(0 0% 0% / 0.04);
+}
+
+:global(:root[data-theme='dark']) .brand:hover,
+:global(:root[data-theme='dark']) .themeToggle:hover {
+  background: hsl(0 0% 100% / 0.08);
 }
 
 .themeLabel {
@@ -38,6 +58,10 @@
 }
 
 @media (min-width: 48rem) {
+  .inner {
+    padding: 1.45rem 0;
+  }
+
   .brand {
     font-size: 1.25rem;
   }
