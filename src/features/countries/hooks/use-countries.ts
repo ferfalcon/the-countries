@@ -4,7 +4,7 @@ import { fetchCountrySummaries } from '@/features/countries/api/countries-api';
 import { mapCountrySummary } from '@/features/countries/mappers/map-country-summary';
 import type { CountrySummary } from '@/features/countries/models/country';
 
-export type CountriesStatus = 'idle' | 'loading' | 'success' | 'error';
+export type CountriesStatus = 'loading' | 'success' | 'error';
 
 export interface UseCountriesResult {
   countries: CountrySummary[];

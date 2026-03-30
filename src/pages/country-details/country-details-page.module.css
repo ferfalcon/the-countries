@@ -9,8 +9,9 @@
 
 .state {
   display: grid;
+  width: min(100%, 42rem);
   justify-items: center;
-  max-width: 42rem;
+  justify-self: center;
   padding: 3rem 1.5rem;
   border-radius: 0.75rem;
   background: var(--color-surface);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CountriesGrid } from '@/components/countries/countries-grid';
 import { CountryCard } from '@/components/countries/country-card';
@@ -19,6 +19,10 @@ export function HomePage() {
     region: selectedRegion,
     searchTerm,
   });
+
+  useEffect(() => {
+    document.title = 'REST Countries | Explore countries';
+  }, []);
 
   return (
     <section
@@ -55,10 +59,7 @@ export function HomePage() {
         <div className={styles.state}>
           <StatusMessage
             title="Unable to load countries"
-            message={
-              errorMessage ??
-              'Please try again later.'
-            }
+            message={errorMessage ?? 'Please try again later.'}
           />
         </div>
       )}

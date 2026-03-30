@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import { BackButton } from '@/components/countries/back-button';
@@ -13,6 +14,28 @@ export function CountryDetailsPage() {
   const { borderCountries, country, errorMessage, status } = useCountryDetails(
     code,
   );
+
+  useEffect(() => {
+    if (status === 'success' && country) {
+      document.title = `${country.name} | REST Countries`;
+
+      return;
+    }
+
+    if (status === 'not-found') {
+      document.title = 'Country not found | REST Countries';
+
+      return;
+    }
+
+    if (status === 'error') {
+      document.title = 'Unable to load country | REST Countries';
+
+      return;
+    }
+
+    document.title = 'REST Countries | Country details';
+  }, [country, status]);
 
   return (
     <section className={styles.page} aria-busy={status === 'loading'}>
@@ -37,10 +60,7 @@ export function CountryDetailsPage() {
         <div className={styles.state}>
           <StatusMessage
             title="Country not found"
-            message={
-              errorMessage ??
-              'The requested country could not be found.'
-            }
+            message={errorMessage ?? 'The requested country could not be found.'}
           />
         </div>
       )}

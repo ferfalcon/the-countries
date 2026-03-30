@@ -15,7 +15,6 @@ import type {
 } from '@/features/countries/models/country';
 
 export type CountryDetailsStatus =
-  | 'idle'
   | 'loading'
   | 'success'
   | 'error'
