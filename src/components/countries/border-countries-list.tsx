@@ -1,21 +1,28 @@
-export interface BorderCountryLink {
-  code: string;
-  name: string;
-}
+import { Link } from 'react-router';
+
+import type { BorderCountry } from '@/features/countries/models/country';
+
+import styles from './border-countries-list.module.css';
 
 interface BorderCountriesListProps {
-  countries: BorderCountryLink[];
+  countries: BorderCountry[];
 }
 
 export function BorderCountriesList({ countries }: BorderCountriesListProps) {
   if (countries.length === 0) {
-    return <p>No border countries available.</p>;
+    return (
+      <p className={styles.empty}>This country has no bordering countries.</p>
+    );
   }
 
   return (
-    <ul>
+    <ul className={styles.list}>
       {countries.map((country) => (
-        <li key={country.code}>{country.name}</li>
+        <li key={country.code}>
+          <Link to={`/country/${country.code}`} className={styles.link}>
+            {country.name}
+          </Link>
+        </li>
       ))}
     </ul>
   );

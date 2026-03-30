@@ -8,6 +8,11 @@ export interface CountrySummary {
   flagUrl: string;
 }
 
+export interface BorderCountry {
+  code: string;
+  name: string;
+}
+
 export interface CountryDetails {
   code: string;
   name: string;

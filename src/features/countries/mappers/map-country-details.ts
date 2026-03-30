@@ -1,5 +1,11 @@
-import type { CountryDetails } from '@/features/countries/models/country';
-import type { RawCountryDetails } from '@/features/countries/models/raw-country';
+import type {
+  BorderCountry,
+  CountryDetails,
+} from '@/features/countries/models/country';
+import type {
+  RawBorderCountry,
+  RawCountryDetails,
+} from '@/features/countries/models/raw-country';
 
 export function mapCountryDetails(
   rawCountry: RawCountryDetails,
@@ -24,5 +30,12 @@ export function mapCountryDetails(
     borderCountryCodes: rawCountry.borders ?? [],
     flagAlt: rawCountry.flags.alt ?? `${rawCountry.name.common} flag`,
     flagUrl: rawCountry.flags.svg,
+  };
+}
+
+export function mapBorderCountry(rawCountry: RawBorderCountry): BorderCountry {
+  return {
+    code: rawCountry.cca3,
+    name: rawCountry.name.common,
   };
 }

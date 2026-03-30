@@ -1,4 +1,4 @@
-interface RawCountryName {
+export interface RawCountryName {
   common: string;
   nativeName?: Record<
     string,
@@ -6,6 +6,7 @@ interface RawCountryName {
       common: string;
     }
   >;
+  official?: string;
 }
 
 interface RawCountryFlags {
@@ -20,6 +21,11 @@ export interface RawCountrySummary {
   name: RawCountryName;
   population: number;
   region: string;
+}
+
+export interface RawBorderCountry {
+  cca3: string;
+  name: Pick<RawCountryName, 'common'>;
 }
 
 export interface RawCountryDetails extends RawCountrySummary {

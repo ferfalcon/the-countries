@@ -1,0 +1,9 @@
+.button {
+  justify-self: start;
+  min-width: 6.5rem;
+  border: 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
+  color: var(--color-text);
+}
+

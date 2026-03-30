@@ -1,19 +1,113 @@
-import type { CountryDetails } from '@/features/countries/models/country';
+import { useEffect, useState } from 'react';
 
-import type { CountriesStatus } from './use-countries';
+import {
+  CountryNotFoundError,
+  fetchBorderCountries,
+  fetchCountryDetails,
+} from '@/features/countries/api/countries-api';
+import {
+  mapBorderCountry,
+  mapCountryDetails,
+} from '@/features/countries/mappers/map-country-details';
+import type {
+  BorderCountry,
+  CountryDetails,
+} from '@/features/countries/models/country';
+
+export type CountryDetailsStatus =
+  | 'idle'
+  | 'loading'
+  | 'success'
+  | 'error'
+  | 'not-found';
 
 export interface UseCountryDetailsResult {
+  borderCountries: BorderCountry[];
   country: CountryDetails | null;
   errorMessage: string | null;
-  status: CountriesStatus;
+  status: CountryDetailsStatus;
 }
 
-export function useCountryDetails(_code: string): UseCountryDetailsResult {
-  void _code;
+export function useCountryDetails(code: string): UseCountryDetailsResult {
+  const [borderCountries, setBorderCountries] = useState<BorderCountry[]>([]);
+  const [country, setCountry] = useState<CountryDetails | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<CountryDetailsStatus>(
+    code ? 'loading' : 'not-found',
+  );
+
+  useEffect(() => {
+    if (!code) {
+      setBorderCountries([]);
+      setCountry(null);
+      setErrorMessage(null);
+      setStatus('not-found');
+
+      return;
+    }
+
+    let isCancelled = false;
+
+    async function loadCountryDetails() {
+      setStatus('loading');
+      setBorderCountries([]);
+      setCountry(null);
+      setErrorMessage(null);
+
+      try {
+        const rawCountry = await fetchCountryDetails(code);
+        const mappedCountry = mapCountryDetails(rawCountry);
+        const rawBorderCountries = await fetchBorderCountries(
+          mappedCountry.borderCountryCodes,
+        );
+        const mappedBorderCountries = rawBorderCountries
+          .map(mapBorderCountry)
+          .sort((leftCountry, rightCountry) =>
+            leftCountry.name.localeCompare(rightCountry.name),
+          );
+
+        if (isCancelled) {
+          return;
+        }
+
+        setCountry(mappedCountry);
+        setBorderCountries(mappedBorderCountries);
+        setStatus('success');
+      } catch (error) {
+        if (isCancelled) {
+          return;
+        }
+
+        setBorderCountries([]);
+        setCountry(null);
+
+        if (error instanceof CountryNotFoundError) {
+          setErrorMessage(error.message);
+          setStatus('not-found');
+
+          return;
+        }
+
+        setErrorMessage(
+          error instanceof Error
+            ? error.message
+            : 'Something went wrong while loading country details.',
+        );
+        setStatus('error');
+      }
+    }
+
+    void loadCountryDetails();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [code]);
 
   return {
-    country: null,
-    errorMessage: null,
-    status: 'idle',
+    borderCountries,
+    country,
+    errorMessage,
+    status,
   };
 }

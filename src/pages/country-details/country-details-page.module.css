@@ -5,10 +5,19 @@
 
 .content {
   display: grid;
-  gap: 1.5rem;
 }
 
-.title {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 2.75rem);
+.state {
+  display: grid;
+  justify-items: center;
+  padding: 3rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 64rem) {
+  .page {
+    gap: 4rem;
+  }
 }
