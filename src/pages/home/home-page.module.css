@@ -8,6 +8,15 @@
   gap: 2.5rem;
 }
 
+.state {
+  display: grid;
+  justify-items: center;
+  padding: 3rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
 @media (min-width: 48rem) {
   .page {
     gap: 3rem;

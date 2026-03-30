@@ -7,9 +7,17 @@ export interface FilterCountriesOptions {
 
 export function filterCountries(
   countries: CountrySummary[],
-  _options: FilterCountriesOptions,
+  options: FilterCountriesOptions,
 ): CountrySummary[] {
-  void _options;
+  const normalizedSearchTerm = options.searchTerm.trim().toLowerCase();
 
-  return countries;
+  return countries.filter((country) => {
+    const matchesRegion =
+      options.region === '' || country.region === options.region;
+    const matchesSearch =
+      normalizedSearchTerm === '' ||
+      country.name.toLowerCase().includes(normalizedSearchTerm);
+
+    return matchesRegion && matchesSearch;
+  });
 }
