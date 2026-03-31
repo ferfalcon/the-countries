@@ -21,7 +21,13 @@ export function CountryDetailsPanel({
 }: CountryDetailsPanelProps) {
   return (
     <article className={styles.panel}>
-      <img className={styles.flag} src={country.flagUrl} alt={country.flagAlt} />
+      <img
+        className={styles.flag}
+        src={country.flagUrl}
+        alt={country.flagAlt}
+        width={560}
+        height={400}
+      />
 
       <section className={styles.content} aria-labelledby="country-name">
         <h1 id="country-name" className={styles.name}>

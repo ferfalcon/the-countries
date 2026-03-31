@@ -5,7 +5,8 @@
 
 .flag {
   width: 100%;
-  background: var(--color-surface);
+  height: auto;
+  display: block;
   border-radius: 0.5rem;
   box-shadow: var(--shadow-elevated);
 }
