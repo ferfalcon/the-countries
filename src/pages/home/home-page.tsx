@@ -11,18 +11,27 @@ import { filterCountries } from '@/features/countries/utils/filter-countries';
 
 import styles from './home-page.module.css';
 
+const INITIAL_COUNTRIES_BATCH_SIZE = 24;
+
 export function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('');
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNTRIES_BATCH_SIZE);
   const { countries, errorMessage, status } = useCountries();
   const filteredCountries = filterCountries(countries, {
     region: selectedRegion,
     searchTerm,
   });
+  const visibleCountries = filteredCountries.slice(0, visibleCount);
+  const hasMoreCountries = visibleCountries.length < filteredCountries.length;
 
   useEffect(() => {
     document.title = 'REST Countries | Explore countries';
   }, []);
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_COUNTRIES_BATCH_SIZE);
+  }, [searchTerm, selectedRegion]);
 
   return (
     <section
@@ -72,11 +81,30 @@ export function HomePage() {
       )}
 
       {status === 'success' && filteredCountries.length > 0 && (
-        <CountriesGrid>
-          {filteredCountries.map((country) => (
-            <CountryCard key={country.code} country={country} />
-          ))}
-        </CountriesGrid>
+        <>
+          <CountriesGrid>
+            {visibleCountries.map((country) => (
+              <CountryCard key={country.code} country={country} />
+            ))}
+          </CountriesGrid>
+
+          {hasMoreCountries && (
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={styles.showMoreButton}
+                onClick={() => {
+                  setVisibleCount(
+                    (currentVisibleCount) =>
+                      currentVisibleCount + INITIAL_COUNTRIES_BATCH_SIZE,
+                  );
+                }}
+              >
+                Show more
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );

@@ -19,6 +19,17 @@
   box-shadow: var(--shadow-soft);
 }
 
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.showMoreButton {
+  min-width: 9rem;
+  border: 0;
+  box-shadow: var(--shadow-elevated);
+}
+
 @media (min-width: 48rem) {
   .page {
     gap: 3rem;

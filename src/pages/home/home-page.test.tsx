@@ -43,6 +43,16 @@ const countries: CountrySummary[] = [
   },
 ];
 
+const manyCountries = Array.from({ length: 30 }, (_, index) => ({
+  code: `C${index + 1}`,
+  name: `Country ${index + 1}`,
+  population: 1000 + index,
+  region: index < 26 ? 'Europe' : 'Asia',
+  capital: `Capital ${index + 1}`,
+  flagAlt: `Flag of Country ${index + 1}`,
+  flagUrl: `https://flagcdn.com/c${index + 1}.svg`,
+})) satisfies CountrySummary[];
+
 function renderHomePage() {
   return render(
     <MemoryRouter>
@@ -116,6 +126,37 @@ describe('HomePage', () => {
     expect(screen.getByRole('heading', { name: 'Japan' })).toBeInTheDocument();
   });
 
+  it('renders only the initial batch and reveals more countries progressively', async () => {
+    const user = userEvent.setup();
+
+    useCountriesMock.mockReturnValue({
+      countries: manyCountries,
+      errorMessage: null,
+      status: 'success',
+    });
+
+    renderHomePage();
+
+    expect(
+      screen.getByRole('heading', { name: 'Country 24' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: 'Country 25' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Show more' }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Show more' }));
+
+    expect(
+      screen.getByRole('heading', { name: 'Country 30' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Show more' }),
+    ).not.toBeInTheDocument();
+  });
+
   it('filters rendered countries when typing in search', async () => {
     const user = userEvent.setup();
 
@@ -162,5 +203,45 @@ describe('HomePage', () => {
     expect(
       screen.queryByRole('heading', { name: 'Germany' }),
     ).not.toBeInTheDocument();
+  });
+
+  it('resets back to the initial batch when filters change', async () => {
+    const user = userEvent.setup();
+
+    useCountriesMock.mockReturnValue({
+      countries: manyCountries,
+      errorMessage: null,
+      status: 'success',
+    });
+
+    renderHomePage();
+
+    await user.click(screen.getByRole('button', { name: 'Show more' }));
+
+    expect(
+      screen.getByRole('heading', { name: 'Country 30' }),
+    ).toBeInTheDocument();
+
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: 'Filter by region' }),
+      'Asia',
+    );
+
+    expect(screen.getByRole('heading', { name: 'Country 27' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Show more' }),
+    ).not.toBeInTheDocument();
+
+    await user.selectOptions(
+      screen.getByRole('combobox', { name: 'Filter by region' }),
+      'Europe',
+    );
+
+    expect(
+      screen.queryByRole('heading', { name: 'Country 25' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Show more' }),
+    ).toBeInTheDocument();
   });
 });
