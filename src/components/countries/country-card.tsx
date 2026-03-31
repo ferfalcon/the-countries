@@ -6,9 +6,13 @@ import styles from './country-card.module.css';
 
 interface CountryCardProps {
   country: CountrySummary;
+  prioritizeImage?: boolean;
 }
 
-export function CountryCard({ country }: CountryCardProps) {
+export function CountryCard({
+  country,
+  prioritizeImage = false,
+}: CountryCardProps) {
   return (
     <li className={styles.item}>
       <article className={styles.card}>
@@ -20,7 +24,8 @@ export function CountryCard({ country }: CountryCardProps) {
             className={styles.flag}
             src={country.flagUrl}
             alt={country.flagAlt}
-            loading="lazy"
+            loading={prioritizeImage ? 'eager' : 'lazy'}
+            fetchPriority={prioritizeImage ? 'high' : 'auto'}
           />
 
           <div className={styles.body}>

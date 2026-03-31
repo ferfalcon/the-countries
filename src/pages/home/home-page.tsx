@@ -12,6 +12,7 @@ import { filterCountries } from '@/features/countries/utils/filter-countries';
 import styles from './home-page.module.css';
 
 const INITIAL_COUNTRIES_BATCH_SIZE = 24;
+const PRIORITIZED_COUNTRY_IMAGE_COUNT = 4;
 
 export function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -83,8 +84,12 @@ export function HomePage() {
       {status === 'success' && filteredCountries.length > 0 && (
         <>
           <CountriesGrid>
-            {visibleCountries.map((country) => (
-              <CountryCard key={country.code} country={country} />
+            {visibleCountries.map((country, index) => (
+              <CountryCard
+                key={country.code}
+                country={country}
+                prioritizeImage={index < PRIORITIZED_COUNTRY_IMAGE_COUNT}
+              />
             ))}
           </CountriesGrid>
 
