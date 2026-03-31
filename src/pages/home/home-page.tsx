@@ -34,12 +34,10 @@ export function HomePage() {
         Browse countries
       </h1>
 
-      <form
+      <section
         className={styles.controls}
+        role="group"
         aria-label="Search and filter countries"
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
       >
         <SearchInput
           value={searchTerm}
@@ -47,7 +45,7 @@ export function HomePage() {
           placeholder="Search for a country..."
         />
         <RegionFilter value={selectedRegion} onChange={setSelectedRegion} />
-      </form>
+      </section>
 
       {status === 'loading' && (
         <div className={styles.state}>
