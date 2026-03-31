@@ -1,12 +1,19 @@
 :root {
   color-scheme: light;
   --font-family-base: 'Nunito Sans', 'Segoe UI', sans-serif;
+  --layout-inline-gutter: 1rem;
+  --layout-max-width: 80rem;
+  --radius-sm: 0.35rem;
+  --radius-md: 0.5rem;
   --color-background: hsl(0 0% 98%);
   --color-surface: hsl(0 0% 100%);
   --color-text: hsl(200 15% 8%);
   --color-text-muted: hsl(200 15% 32%);
   --color-border: hsl(0 0% 85%);
+  --color-focus-ring: hsl(199 88% 48%);
+  --motion-duration-fast: 180ms;
   --shadow-elevated: 0 0.25rem 1rem hsl(0 0% 0% / 0.08);
+  --shadow-header: 0 0.125rem 0.5rem hsl(0 0% 0% / 0.08);
   --shadow-soft: 0 0.125rem 0.5rem hsl(0 0% 0% / 0.06);
 }
 

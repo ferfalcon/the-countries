@@ -1,6 +1,6 @@
 .header {
   background: var(--color-surface);
-  box-shadow: 0 0.125rem 0.5rem hsl(0 0% 0% / 0.08);
+  box-shadow: var(--shadow-header);
 }
 
 .inner {
@@ -8,7 +8,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  width: min(100% - 2rem, 80rem);
+  width: min(
+    100% - calc(var(--layout-inline-gutter) * 2),
+    var(--layout-max-width)
+  );
   margin: 0 auto;
   min-height: 5rem;
 }
@@ -22,7 +25,7 @@
   letter-spacing: -0.03em;
   color: var(--color-text);
   text-decoration: none;
-  border-radius: 0.4rem;
+  border-radius: var(--radius-sm);
 }
 
 .themeToggle {
@@ -33,7 +36,7 @@
   border: 0;
   box-shadow: none;
   padding: 0.35rem 0;
-  border-radius: 0.35rem;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-text);
   font: inherit;
@@ -41,7 +44,7 @@
   font-size: 0.75rem;
   line-height: 1;
   cursor: pointer;
-  transition: opacity 180ms ease;
+  transition: opacity var(--motion-duration-fast) ease;
 }
 
 .themeLabel {
