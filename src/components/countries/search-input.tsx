@@ -1,3 +1,7 @@
+import iconSearchDark from '@/assets/icon-search-dark.svg';
+import iconSearchLight from '@/assets/icon-search-light.svg';
+import { useTheme } from '@/features/theme/use-theme';
+
 import styles from './search-input.module.css';
 
 interface SearchInputProps {
@@ -13,10 +17,17 @@ export function SearchInput({
   disabled = false,
   placeholder = 'Search...',
 }: SearchInputProps) {
+  const { theme } = useTheme();
+
   return (
     <label className={styles.field}>
       <span className="sr-only">Search for a country</span>
-      <span className={styles.icon} aria-hidden="true" />
+      <img
+        className={styles.icon}
+        src={theme === 'light' ? iconSearchLight : iconSearchDark}
+        alt=""
+        aria-hidden="true"
+      />
       <input
         className={styles.input}
         type="search"
