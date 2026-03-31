@@ -18,13 +18,13 @@ export function useCountries(): UseCountriesResult {
   const [status, setStatus] = useState<CountriesStatus>('loading');
 
   useEffect(() => {
-    let isCancelled = false;
+    const controller = new AbortController();
 
     async function loadCountries() {
       try {
-        const rawCountries = await fetchCountrySummaries();
+        const rawCountries = await fetchCountrySummaries(controller.signal);
 
-        if (isCancelled) {
+        if (controller.signal.aborted) {
           return;
         }
 
@@ -32,7 +32,7 @@ export function useCountries(): UseCountriesResult {
         setErrorMessage(null);
         setStatus('success');
       } catch (error) {
-        if (isCancelled) {
+        if (error instanceof Error && error.name === 'AbortError') {
           return;
         }
 
@@ -49,7 +49,7 @@ export function useCountries(): UseCountriesResult {
     void loadCountries();
 
     return () => {
-      isCancelled = true;
+      controller.abort();
     };
   }, []);
 

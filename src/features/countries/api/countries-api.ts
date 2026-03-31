@@ -49,9 +49,12 @@ function getCountryFromResponse<T>(payload: T | T[]): T {
   return payload;
 }
 
-export async function fetchCountrySummaries(): Promise<RawCountrySummary[]> {
+export async function fetchCountrySummaries(
+  signal?: AbortSignal,
+): Promise<RawCountrySummary[]> {
   const response = await fetch(
     `${COUNTRIES_API_BASE_URL}/all?fields=${COUNTRY_SUMMARY_FIELDS.join(',')}`,
+    { signal },
   );
 
   if (!response.ok) {
@@ -63,9 +66,11 @@ export async function fetchCountrySummaries(): Promise<RawCountrySummary[]> {
 
 export async function fetchCountryDetails(
   code: string,
+  signal?: AbortSignal,
 ): Promise<RawCountryDetails> {
   const response = await fetch(
     `${COUNTRIES_API_BASE_URL}/alpha/${code}?fields=${COUNTRY_DETAILS_FIELDS.join(',')}`,
+    { signal },
   );
 
   if (response.status === 404) {
@@ -83,6 +88,7 @@ export async function fetchCountryDetails(
 
 export async function fetchBorderCountries(
   codes: string[],
+  signal?: AbortSignal,
 ): Promise<RawBorderCountry[]> {
   if (codes.length === 0) {
     return [];
@@ -90,6 +96,7 @@ export async function fetchBorderCountries(
 
   const response = await fetch(
     `${COUNTRIES_API_BASE_URL}/alpha?codes=${codes.join(',')}&fields=${BORDER_COUNTRY_FIELDS.join(',')}`,
+    { signal },
   );
 
   if (!response.ok) {
