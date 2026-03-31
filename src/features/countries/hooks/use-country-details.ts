@@ -45,7 +45,7 @@ export function useCountryDetails(code: string): UseCountryDetailsResult {
       return;
     }
 
-    let isCancelled = false;
+    const controller = new AbortController();
 
     async function loadCountryDetails() {
       setStatus('loading');
@@ -54,10 +54,11 @@ export function useCountryDetails(code: string): UseCountryDetailsResult {
       setErrorMessage(null);
 
       try {
-        const rawCountry = await fetchCountryDetails(code);
+        const rawCountry = await fetchCountryDetails(code, controller.signal);
         const mappedCountry = mapCountryDetails(rawCountry);
         const rawBorderCountries = await fetchBorderCountries(
           mappedCountry.borderCountryCodes,
+          controller.signal,
         );
         const mappedBorderCountries = rawBorderCountries
           .map(mapBorderCountry)
@@ -65,7 +66,7 @@ export function useCountryDetails(code: string): UseCountryDetailsResult {
             leftCountry.name.localeCompare(rightCountry.name),
           );
 
-        if (isCancelled) {
+        if (controller.signal.aborted) {
           return;
         }
 
@@ -73,7 +74,7 @@ export function useCountryDetails(code: string): UseCountryDetailsResult {
         setBorderCountries(mappedBorderCountries);
         setStatus('success');
       } catch (error) {
-        if (isCancelled) {
+        if (error instanceof Error && error.name === 'AbortError') {
           return;
         }
 
@@ -99,7 +100,7 @@ export function useCountryDetails(code: string): UseCountryDetailsResult {
     void loadCountryDetails();
 
     return () => {
-      isCancelled = true;
+      controller.abort();
     };
   }, [code]);
 
