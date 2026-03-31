@@ -15,9 +15,9 @@ interface RawCountryFlags {
 }
 
 export interface RawCountrySummary {
+  cca2: string;
   cca3: string;
   capital?: string[];
-  flags: RawCountryFlags;
   name: RawCountryName;
   population: number;
   region: string;
@@ -28,15 +28,21 @@ export interface RawBorderCountry {
   name: Pick<RawCountryName, 'common'>;
 }
 
-export interface RawCountryDetails extends RawCountrySummary {
+export interface RawCountryDetails {
   borders?: string[];
+  capital?: string[];
+  cca3: string;
   currencies?: Record<
     string,
     {
       name: string;
     }
   >;
+  flags: RawCountryFlags;
   languages?: Record<string, string>;
+  name: RawCountryName;
+  population: number;
+  region: string;
   subregion?: string;
   tld: string[];
 }

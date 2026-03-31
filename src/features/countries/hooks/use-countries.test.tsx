@@ -29,12 +29,9 @@ describe('useCountries', () => {
     fetchMock.mockResolvedValue(
       createJsonResponse([
         {
+          cca2: 'BR',
           cca3: 'BRA',
           capital: ['Brasilia'],
-          flags: {
-            alt: 'Flag of Brazil',
-            svg: 'https://flagcdn.com/br.svg',
-          },
           name: {
             common: 'Brazil',
           },
@@ -92,4 +89,3 @@ describe('useCountries', () => {
     expect(result.current.errorMessage).toBe('Failed to fetch countries.');
   });
 });
-

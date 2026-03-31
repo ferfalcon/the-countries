@@ -5,12 +5,9 @@ import { mapCountrySummary } from './map-country-summary';
 describe('mapCountrySummary', () => {
   it('maps valid raw API data correctly', () => {
     const rawCountry: RawCountrySummary = {
+      cca2: 'BR',
       cca3: 'BRA',
       capital: ['Brasilia'],
-      flags: {
-        alt: 'Flag of Brazil',
-        svg: 'https://flagcdn.com/br.svg',
-      },
       name: {
         common: 'Brazil',
       },
@@ -31,10 +28,8 @@ describe('mapCountrySummary', () => {
 
   it('applies fallbacks for missing fields', () => {
     const rawCountry: RawCountrySummary = {
+      cca2: 'AQ',
       cca3: 'ATA',
-      flags: {
-        svg: 'https://flagcdn.com/aq.svg',
-      },
       name: {
         common: 'Antarctica',
       },
@@ -53,13 +48,11 @@ describe('mapCountrySummary', () => {
     });
   });
 
-  it('builds safe flag alt text when the API does not provide one', () => {
+  it('builds safe flag alt text and derives the summary flag url locally', () => {
     const rawCountry: RawCountrySummary = {
+      cca2: 'JP',
       cca3: 'JPN',
       capital: ['Tokyo'],
-      flags: {
-        svg: 'https://flagcdn.com/jp.svg',
-      },
       name: {
         common: 'Japan',
       },
@@ -68,6 +61,8 @@ describe('mapCountrySummary', () => {
     };
 
     expect(mapCountrySummary(rawCountry).flagAlt).toBe('Flag of Japan');
+    expect(mapCountrySummary(rawCountry).flagUrl).toBe(
+      'https://flagcdn.com/jp.svg',
+    );
   });
 });
-

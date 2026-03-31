@@ -6,9 +6,9 @@ import type {
 
 const COUNTRIES_API_BASE_URL = 'https://restcountries.com/v3.1';
 const COUNTRY_SUMMARY_FIELDS = [
+  'cca2',
   'cca3',
   'capital',
-  'flags',
   'name',
   'population',
   'region',
