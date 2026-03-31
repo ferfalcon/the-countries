@@ -1,11 +1,16 @@
 import { Link } from 'react-router';
 
+import iconDark from '@/assets/icon-dark.svg';
+import iconLight from '@/assets/icon-light.svg';
 import { useTheme } from '@/features/theme/use-theme';
 
 import styles from './app-header.module.css';
 
 export function AppHeader() {
   const { theme, toggleTheme } = useTheme();
+  const nextTheme = theme === 'light' ? 'dark' : 'light';
+  const themeLabel = nextTheme === 'dark' ? 'Dark Mode' : 'Light Mode';
+  const themeIcon = nextTheme === 'dark' ? iconDark : iconLight;
 
   return (
     <header className={styles.header}>
@@ -18,12 +23,11 @@ export function AppHeader() {
           type="button"
           className={styles.themeToggle}
           onClick={toggleTheme}
-          aria-label={`Activate ${theme === 'light' ? 'dark' : 'light'} theme`}
+          aria-label={`Activate ${nextTheme} theme`}
           aria-pressed={theme === 'dark'}
         >
-          <span className={styles.themeLabel}>
-            {theme === 'light' ? 'Dark mode' : 'Light mode'}
-          </span>
+          <img className={styles.themeIcon} src={themeIcon} alt="" aria-hidden="true" />
+          <span className={styles.themeLabel}>{themeLabel}</span>
         </button>
       </div>
     </header>

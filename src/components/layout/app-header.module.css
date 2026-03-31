@@ -1,9 +1,6 @@
 .header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
   background: var(--color-surface);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: 0 0.125rem 0.5rem hsl(0 0% 0% / 0.08);
 }
 
 .inner {
@@ -13,7 +10,7 @@
   gap: 1rem;
   width: min(100% - 2rem, 80rem);
   margin: 0 auto;
-  padding: 1.5rem 0;
+  min-height: 5rem;
 }
 
 .brand {
@@ -22,6 +19,7 @@
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.2;
+  letter-spacing: -0.03em;
   color: var(--color-text);
   text-decoration: none;
   border-radius: 0.4rem;
@@ -31,38 +29,49 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   border: 0;
-  padding: 0.5rem 0.75rem;
-  border-radius: 999px;
+  box-shadow: none;
+  padding: 0.35rem 0;
+  border-radius: 0.35rem;
   background: transparent;
   color: var(--color-text);
   font: inherit;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
   cursor: pointer;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease;
-}
-
-.brand:hover,
-.themeToggle:hover {
-  background: hsl(0 0% 0% / 0.04);
-}
-
-:global(:root[data-theme='dark']) .brand:hover,
-:global(:root[data-theme='dark']) .themeToggle:hover {
-  background: hsl(0 0% 100% / 0.08);
+  transition: opacity 180ms ease;
 }
 
 .themeLabel {
   font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.themeIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+}
+
+.brand:hover,
+.themeToggle:hover {
+  opacity: 0.82;
 }
 
 @media (min-width: 48rem) {
-  .inner {
-    padding: 1.45rem 0;
+  .brand {
+    font-size: 1.5rem;
   }
 
-  .brand {
-    font-size: 1.25rem;
+  .themeToggle {
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .themeIcon {
+    width: 1rem;
+    height: 1rem;
   }
 }
